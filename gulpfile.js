@@ -9,7 +9,6 @@ var concat = require('gulp-concat');
 var gutil = require('gulp-util');
 var del = require('del');
 var uglify = require('gulp-uglify');
-//var gulpCopy = require('gulp-file-copy')
 
 gulp.task('less', function() {
     gulp.src('src/less/*.less')
@@ -21,9 +20,11 @@ gulp.task('less', function() {
         //.pipe(cleanCSS({compatibility: 'ie8'}))
         .pipe(gulp.dest('dist/'))
 });
+
 gulp.task("js",function(){
-    gulp.src('src/js/*.js').pipe(concat('dnspannel.js')).pipe(uglify()).pipe(gulp.dest('dist/'));
-})
+    return gulp.src('src/js/*.js').pipe(concat('dnspannel.js')).pipe(gulp.dest('dist/'));
+
+});
 
 gulp.task('image', function() {
     del([

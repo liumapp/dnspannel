@@ -19,11 +19,14 @@
   "dependencies": {
     "autoprefixer": "^7.0.1",
     "del": "^2.2.2",
+    "fs": "0.0.1-security",
     "gulp": "^3.9.1",
     "gulp-concat": "^2.6.1",
     "gulp-less": "^3.3.0",
     "gulp-tools": "0.0.3",
     "gulp-util": "^3.0.8",
-    "jquery": "^1.12.4"
+    "jquery": "^1.12.4",
+    "pump": "^1.0.2",
+    "uglifyjs": "^2.4.10"
   }
 }
