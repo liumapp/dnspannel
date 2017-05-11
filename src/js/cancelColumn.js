@@ -3,4 +3,4 @@ $(function () {
         $.lmParam.state = 1;
         $(this).parent().parent().remove();
     })
-});
+});{}

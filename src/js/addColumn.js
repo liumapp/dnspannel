@@ -2,10 +2,6 @@ $(function (){
     var addBtn = $(".lm-add-dns-record");
     var table = $(".lm-dns-table");
     var titleTr = $(".lm-title-tr");
-    var recordType = [
-        {value:'a',text:'A'},
-        {value:'cname',text:'CNAME'}
-    ];
     addBtn.click(function (){
         if ($.lmParam.state == 1) {
             var tr = buildColumn();
@@ -21,7 +17,7 @@ $(function (){
         var td0=$('<td></td>'),td1=$('<td></td>'),td2=$('<td></td>'),td3=$('<td></td>'),td4=$('<td></td>'),td5=$('<td></td>');
         var tr = $('<tr class="lm-edit-tr"></tr>');
         td0.append($('<input type="checkbox">'));
-        $(recordType).each(function (n,ele) {
+        $($.lmParam.recordType).each(function (n,ele) {
             select.append($('<option value="'+ele.value+'">'+ele.text+'</option>'));
         });
         td1.append(select);
