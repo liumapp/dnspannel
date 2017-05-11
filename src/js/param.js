@@ -10,6 +10,7 @@ $(function (){
             {'value':'A','text':'A'},
             {'value':'CNAME','text':'CNAME'}
         ],
+        tmpRecord:{},
         state:1,
         homePage:"http://www.liumapp.com",
         addDnsRecordUrl:"http://localhost:8080/whmcs/vendor2/vendor/liumapp/dns/page/addDnsRecord.php",
