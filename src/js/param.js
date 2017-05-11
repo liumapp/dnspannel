@@ -15,6 +15,7 @@ $(function (){
         homePage:"http://www.liumapp.com",
         addDnsRecordUrl:"http://localhost:8080/whmcs/vendor2/vendor/liumapp/dns/page/addDnsRecord.php",
         initDataUrl:"http://localhost:8080/whmcs/vendor2/vendor/liumapp/dns/page/initRecord.php",
-        updateDnsRecordUrl:"http://localhost:8080/whmcs/vendor2/vendor/liumapp/dns/page/updateDnsRecord.php"
+        updateDnsRecordUrl:"http://localhost:8080/whmcs/vendor2/vendor/liumapp/dns/page/updateDnsRecord.php",
+        deleteDnsRecordUrl:"http://localhost:8080/whmcs/vendor2/vendor/liumapp/dns/page/deleteDnsRecord.php",
     }
 });

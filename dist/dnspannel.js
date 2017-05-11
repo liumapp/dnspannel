@@ -63,9 +63,26 @@ $(function () {
 });
 
 
-var delcolumn = function () {
-    console.log('del column');
-}
+$(function () {
+    $('body').on('click' , '.lm-delete-btn' ,function () {
+        var tr = $(this).parent().parent();
+        $.ajax({
+            url:$.lmParam.deleteDnsRecordUrl,
+            method:"post",
+            data: {
+                id:$($(tr.children()[0]).children()[0]).val()
+            },
+            success: function (data) {
+                
+                tr.remove();
+
+            }
+        });
+
+
+    });
+
+});
 $(function () {
     window.onload = function () {
         var titleTr = $(".lm-title-tr");
@@ -121,7 +138,8 @@ $(function (){
         homePage:"http://www.liumapp.com",
         addDnsRecordUrl:"http://localhost:8080/whmcs/vendor2/vendor/liumapp/dns/page/addDnsRecord.php",
         initDataUrl:"http://localhost:8080/whmcs/vendor2/vendor/liumapp/dns/page/initRecord.php",
-        updateDnsRecordUrl:"http://localhost:8080/whmcs/vendor2/vendor/liumapp/dns/page/updateDnsRecord.php"
+        updateDnsRecordUrl:"http://localhost:8080/whmcs/vendor2/vendor/liumapp/dns/page/updateDnsRecord.php",
+        deleteDnsRecordUrl:"http://localhost:8080/whmcs/vendor2/vendor/liumapp/dns/page/deleteDnsRecord.php",
     }
 });
 $(function () {
