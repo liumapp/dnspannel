@@ -17,7 +17,7 @@ $(function () {
     var dataColumn = function (data) {
         var td0=$('<td></td>'),td1=$('<td></td>'),td2=$('<td></td>'),td3=$('<td></td>'),td4=$('<td></td>'),td5=$('<td></td>');
         var tr = $('<tr class="lm-tr"></tr>');
-        td0.append($('<input type="checkbox">'));
+        td0.append($('<input type="checkbox" value="'+data.id+'">'));
         td1.append($('<p>'+data.type+'</p>'));
         td2.append($('<p>'+data.subdomain+'</p>'));
         td3.append($('<p>'+data.value+'</p>'));

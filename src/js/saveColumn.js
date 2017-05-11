@@ -9,18 +9,14 @@ $(function () {
         {
             url:$.lmParam.addDnsRecordUrl,
             data:{
-                uid:$.lmParam.uid,
-                domainId:$.lmParam.domainId,
                 type:$('.lm-edit-type').val(),
                 subdomain:$('.lm-edit-subdomain').val(),
                 value:$('.lm-edit-value').val()
             },
             method:'post',
             success:function(data){
-                if(data == 'success') {
-                    $.lmParam.state = 1;
-                    changeTr(tr);
-                }
+                $.lmParam.state = 1;
+                changeTr(tr,data);
             },
             error:function(data){
                 $.lmParam.state = 2;
@@ -28,9 +24,12 @@ $(function () {
         });
     });
 
-    var changeTr = function (tr) {
+    var changeTr = function (tr,index) {
         tr.attr('class' , 'lm-tr');
-        //只修改2，3，4的值
+        //只修改1,2，3，4的值
+        td0 = $(tr.children()[0]);
+        td0.empty();
+        td0.append($('<input type="checkbox" value="'+index+'">'));
         for (var i = 1 ; i < 4 ; i++ ) {
             var ele = $(tr.children()[i]);
             var content = $(ele.children()[0]);

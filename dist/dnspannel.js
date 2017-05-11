@@ -85,7 +85,7 @@ $(function () {
     var dataColumn = function (data) {
         var td0=$('<td></td>'),td1=$('<td></td>'),td2=$('<td></td>'),td3=$('<td></td>'),td4=$('<td></td>'),td5=$('<td></td>');
         var tr = $('<tr class="lm-tr"></tr>');
-        td0.append($('<input type="checkbox">'));
+        td0.append($('<input type="checkbox" value="'+data.id+'">'));
         td1.append($('<p>'+data.type+'</p>'));
         td2.append($('<p>'+data.subdomain+'</p>'));
         td3.append($('<p>'+data.value+'</p>'));
@@ -121,8 +121,7 @@ $(function (){
         homePage:"http://www.liumapp.com",
         addDnsRecordUrl:"http://localhost:8080/whmcs/vendor2/vendor/liumapp/dns/page/addDnsRecord.php",
         initDataUrl:"http://localhost:8080/whmcs/vendor2/vendor/liumapp/dns/page/initRecord.php",
-        uid:1,
-        domainId:1
+        updateDnsRecordUrl:"http://localhost:8080/whmcs/vendor2/vendor/liumapp/dns/page/updateDnsRecord.php"
     }
 });
 $(function () {
@@ -136,18 +135,14 @@ $(function () {
         {
             url:$.lmParam.addDnsRecordUrl,
             data:{
-                uid:$.lmParam.uid,
-                domainId:$.lmParam.domainId,
                 type:$('.lm-edit-type').val(),
                 subdomain:$('.lm-edit-subdomain').val(),
                 value:$('.lm-edit-value').val()
             },
             method:'post',
             success:function(data){
-                if(data == 'success') {
-                    $.lmParam.state = 1;
-                    changeTr(tr);
-                }
+                $.lmParam.state = 1;
+                changeTr(tr,data);
             },
             error:function(data){
                 $.lmParam.state = 2;
@@ -155,9 +150,12 @@ $(function () {
         });
     });
 
-    var changeTr = function (tr) {
+    var changeTr = function (tr,index) {
         tr.attr('class' , 'lm-tr');
-        //只修改2，3，4的值
+        //只修改1,2，3，4的值
+        td0 = $(tr.children()[0]);
+        td0.empty();
+        td0.append($('<input type="checkbox" value="'+index+'">'));
         for (var i = 1 ; i < 4 ; i++ ) {
             var ele = $(tr.children()[i]);
             var content = $(ele.children()[0]);
@@ -182,9 +180,44 @@ $(function () {
         } else {
             alert('请先保存您正在修改的解析记录');
         }
-
-
     });
+
+    $('body').on('click' , '.lm-update-btn' , function () {
+        var tr = $(this).parent().parent();
+        $.ajax(
+            {
+                url:$.lmParam.updateDnsRecordUrl,
+                data:{
+                    id:$($(tr.children()[0]).children()[0]).val(),
+                    type:$('.lm-edit-type').val(),
+                    subdomain:$('.lm-edit-subdomain').val(),
+                    value:$('.lm-edit-value').val()
+                },
+                method:'post',
+                success:function(data){
+                    $.lmParam.state = 1;
+                    changeTr(tr);
+                },
+                error:function(data){
+                    $.lmParam.state = 2;
+                }
+            });
+    });
+
+    var changeTr = function (tr) {
+        tr.attr('class' , 'lm-tr');
+        //只修改2，3，4的值
+        for (var i = 1 ; i < 4 ; i++ ) {
+            var ele = $(tr.children()[i]);
+            var content = $(ele.children()[0]);
+            ele.empty();
+            ele.append($('<p>'+content.val()+'</p>'));
+        }
+        //修改最后的操作
+        lastTd = $(tr.children()[tr.children().length - 1]);
+        lastTd.empty();
+        lastTd.append($('<a href="javascript:void(0)" class="lm-edit-btn">修改</a><a href="javascript:void(0)" class="lm-delete-btn">删除</a>'));
+    };
 
     var updateableView  = function  (tr) {
 
@@ -216,7 +249,7 @@ $(function () {
         //修改最后的操作
         lastTd = $(tr.children()[tr.children().length - 1]);
         lastTd.empty();
-        lastTd.append($('<a href="javascript:void(0)" class="lm-save-btn">保存</a>&nbsp;<a href="javascript:void(0)" class="lm-back-btn">取消</a>'));
+        lastTd.append($('<a href="javascript:void(0)" class="lm-update-btn">保存</a>&nbsp;<a href="javascript:void(0)" class="lm-back-btn">取消</a>'));
 
     };
 
@@ -227,8 +260,7 @@ $(function () {
             var html = content.html();
             $.lmParam.tmpRecord[i] = html;
         }
-        console.log($.lmParam.tmpRecord);
-    }
+    };
 
 
 
