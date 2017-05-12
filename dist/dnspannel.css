@@ -7,3 +7,10 @@
   width: 100%;
   text-align: center;
 }
+.lm-dns-table a {
+  margin-right: 15px;
+  margin-left: 15px;
+}
+th {
+  text-align: center !important;
+}
