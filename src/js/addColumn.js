@@ -1,18 +1,22 @@
-$(function (){
+define('addColumn',function (require , exports , module) {
+
     var addBtn = $(".lm-add-dns-record");
     var table = $(".lm-dns-table");
     var titleTr = $(".lm-title-tr");
-    addBtn.click(function (){
-        if ($.lmParam.state == 1) {
-            var tr = buildColumn();
-            titleTr.after(tr);
-            $.lmParam.state = 2;
-        } else {
-            alert('当前有尚未保存的记录！');
-        }
-    });
 
-    var buildColumn = function () {
+    exports.init = function () {
+        addBtn.click(function (){
+            if ($.lmParam.state == 1) {
+                var tr = module.exports.buildColumn();
+                titleTr.after(tr);
+                $.lmParam.state = 2;
+            } else {
+                alert('当前有尚未保存的记录！');
+            }
+        });
+    };
+
+    exports.buildColumn = function () {
         var select = $('<select class="lm-edit-type"></select>');
         var td0=$('<td></td>'),td1=$('<td></td>'),td2=$('<td></td>'),td3=$('<td></td>'),td4=$('<td></td>'),td5=$('<td></td>');
         var tr = $('<tr class="lm-edit-tr"></tr>');
@@ -33,4 +37,6 @@ $(function (){
         tr.append(td5);
         return tr;
     }
+
 });
+

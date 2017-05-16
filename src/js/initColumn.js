@@ -1,20 +1,46 @@
-$(function () {
-    window.onload = function () {
-        var titleTr = $(".lm-title-tr");
-        $.ajax({
-            'url': $.lmParam.initDataUrl,
-            'method': 'get',
-            success : function (data) {
-                data = eval(data);
-                $(data).each (function (){
-                    titleTr.after(dataColumn(this));
-                });
-            }
+define('initColumn' , function (require , exports , module) {
 
-        });
+    exports.init = function () {
+        window.onload = function () {
+            var titleTr = $(".lm-title-tr");
+            $.ajax({
+                'url': $.lmParam.initDataUrl,
+                'method': 'get',
+                success : function (data) {
+                    data = eval(data);
+                    if (data.length == 0) {
+                        //要求用户对@记录进行填写
+                        titleTr.after(baseRecord());
+                    } else {
+                        $(data).each (function (){
+                            titleTr.after(module.exports.dataColumn(this));
+                        });
+                    }
+                }
+            });
+        };
     };
 
-    var dataColumn = function (data) {
+    var baseRecord = function () {
+        $.lmParam.state = 2;
+        var td0=$('<td></td>'),td1=$('<td></td>'),td2=$('<td></td>'),td3=$('<td></td>'),td4=$('<td></td>'),td5=$('<td></td>');
+        var tr = $('<tr class="lm-edit-tr"></tr>');
+        td0.append($('<input type="checkbox">'));
+        td1.append($('<p>A</p>'));
+        td2.append($('<p>@</p>'));
+        td3.append($('<input type="text" class="lm-edit-value">'));
+        td4.append('');
+        td5.append('<a href="javascript:void(0)" class="lm-save-btn">保存</a>');
+        tr.append(td0);
+        tr.append(td1);
+        tr.append(td2);
+        tr.append(td3);
+        tr.append(td4);
+        tr.append(td5);
+        return tr;
+    };
+
+    exports.dataColumn = function (data) {
         var td0=$('<td></td>'),td1=$('<td></td>'),td2=$('<td></td>'),td3=$('<td></td>'),td4=$('<td></td>'),td5=$('<td></td>');
         var tr = $('<tr class="lm-tr"></tr>');
         td0.append($('<input type="checkbox" value="'+data.id+'">'));
@@ -30,8 +56,5 @@ $(function () {
         tr.append(td4);
         tr.append(td5);
         return tr;
-    }
-
+    };
 });
-
-

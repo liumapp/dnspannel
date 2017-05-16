@@ -1,6 +1,7 @@
 $(function (){
 
     $.lmParam = {
+        domainId:1,
         defaultValue: [
             {'type':'A','subdomain':'mail','value':'112.13.12.11','status':'1'},
             {'type':'A','subdomain':'mail2','value':'112.13.12.12','status':'2'},
@@ -16,6 +17,7 @@ $(function (){
         addDnsRecordUrl:"http://localhost:8080/whmcs/vendor2/vendor/liumapp/dns/page/addDnsRecord.php",
         initDataUrl:"http://localhost:8080/whmcs/vendor2/vendor/liumapp/dns/page/initRecord.php",
         updateDnsRecordUrl:"http://localhost:8080/whmcs/vendor2/vendor/liumapp/dns/page/updateDnsRecord.php",
-        deleteDnsRecordUrl:"http://localhost:8080/whmcs/vendor2/vendor/liumapp/dns/page/deleteDnsRecord.php",
+        deleteDnsRecordUrl:"http://localhost:8080/whmcs/vendor2/vendor/liumapp/dns/page/deleteDnsRecord.php"
     }
+
 });
