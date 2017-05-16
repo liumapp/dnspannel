@@ -103,7 +103,10 @@ define('initColumn' , function (require , exports , module) {
             var titleTr = $(".lm-title-tr");
             $.ajax({
                 'url': $.lmParam.initDataUrl,
-                'method': 'get',
+                'method': 'post',
+                'data': {
+                    domainId: $.lmParam.domainId,
+                },
                 success : function (data) {
                     data = eval(data);
                     if (data.length == 0) {
