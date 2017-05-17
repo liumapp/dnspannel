@@ -29,7 +29,7 @@ define('saveColumn' , function (require , exports , module) {
             var tr = $(this).parent().parent();
             $.ajax(
                 {
-                    url:$.lmParam.addDnsRecordUrl,
+                    url:$.lmParam.addDnsBaseUrl,
                     data:{
                         domainId:$.lmParam.domainId,
                         type:'A',
@@ -37,15 +37,32 @@ define('saveColumn' , function (require , exports , module) {
                         value:$('.lm-edit-value').val()
                     },
                     method:'post',
-                    success:function(data){
+                    success:function(index) {
                         $.lmParam.state = 1;
-                        module.exports.changeTr(tr,data);
+                        module.exports.changeBaseTr(tr , this.data,index);
                     },
                     error:function(data){
                         $.lmParam.state = 2;
                     }
                 });
         });
+
+    };
+
+    exports.changeBaseTr = function (tr , data , index) {
+
+        tr.attr('class' , 'lm-tr');
+        td0 = $(tr.children()[0]);
+        td0.empty();
+        td0.append($('<input type="checkbox" value="'+index+'">'));
+        td3 = $(tr.children()[3]);
+        td3.empty();
+        td3.append($('<p>'+data.value+'</p>'));
+        //修改最后的操作
+        lastTd = $(tr.children()[tr.children().length - 1]);
+        lastTd.empty();
+        lastTd.append($('<a href="javascript:void(0)" class="lm-edit-btn">修改</a>'));
+
     };
 
     exports.changeTr = function (tr , index) {
@@ -64,5 +81,5 @@ define('saveColumn' , function (require , exports , module) {
         lastTd = $(tr.children()[tr.children().length - 1]);
         lastTd.empty();
         lastTd.append($('<a href="javascript:void(0)" class="lm-edit-btn">修改</a><a href="javascript:void(0)" class="lm-delete-btn">删除</a>'));
-    }
+    };
 });
