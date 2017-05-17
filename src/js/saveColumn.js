@@ -61,7 +61,7 @@ define('saveColumn' , function (require , exports , module) {
         //修改最后的操作
         lastTd = $(tr.children()[tr.children().length - 1]);
         lastTd.empty();
-        lastTd.append($('<a href="javascript:void(0)" class="lm-edit-btn">修改</a>'));
+        lastTd.append($('<a href="javascript:void(0)" class="lm-edit-base-btn">修改</a>'));
 
     };
 

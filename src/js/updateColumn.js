@@ -33,6 +33,36 @@ define ('updateColumn' , function (require , exports , module){
                     }
                 });
         });
+
+        $('body').on('click' , '.lm-edit-base-btn' , function () {
+            var title_tr = $('.lm-title-tr');
+            var init = require('initColumn');
+            title_tr.before(init.baseRecord());
+        });
+
+        $('body').on('click' , '.lm-confirmEdit-base-btn' , function () {
+            var tr = $(this).parent().parent();
+            $.ajax(
+                {
+                    url:$.lmParam.updateDnsBaseRecordUrl,
+                    data:{
+                        domainId:$.lmParam.domainId,
+                        id:$($(tr.children()[0]).children()[0]).val(),
+                        type:'A',
+                        subdomain:'@',
+                        value:$('.lm-edit-value').val()
+                    },
+                    method:'post',
+                    success:function(data){
+                        $.lmParam.state = 1;
+                        var saveColumn = require('saveColumn');
+                        saveColumn.changeBaseTr(tr , this.data , data);
+                    },
+                    error:function(data){
+                        $.lmParam.state = 2;
+                    }
+                });
+        });
     };
 
     exports.changeTr = function (tr) {
@@ -48,7 +78,7 @@ define ('updateColumn' , function (require , exports , module){
         lastTd = $(tr.children()[tr.children().length - 1]);
         lastTd.empty();
         lastTd.append($('<a href="javascript:void(0)" class="lm-edit-btn">修改</a><a href="javascript:void(0)" class="lm-delete-btn">删除</a>'));
-    }
+    };
 
     exports.updateableView = function (tr) {
         tr.attr('class' , 'lm-edit-tr');
@@ -80,7 +110,7 @@ define ('updateColumn' , function (require , exports , module){
         lastTd = $(tr.children()[tr.children().length - 1]);
         lastTd.empty();
         lastTd.append($('<a href="javascript:void(0)" class="lm-update-btn">保存</a>&nbsp;<a href="javascript:void(0)" class="lm-back-btn">取消</a>'));
-    }
+    };
 
     exports.saveOldData = function (tr) {
         for (var i = 1 ; i < 4 ; i ++) {
