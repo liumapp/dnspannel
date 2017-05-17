@@ -24,6 +24,28 @@ define('saveColumn' , function (require , exports , module) {
                     }
                 });
         });
+
+        $('body').on('click' , '.lm-save-base-btn' , function () {
+            var tr = $(this).parent().parent();
+            $.ajax(
+                {
+                    url:$.lmParam.addDnsRecordUrl,
+                    data:{
+                        domainId:$.lmParam.domainId,
+                        type:'A',
+                        subdomain:'@',
+                        value:$('.lm-edit-value').val()
+                    },
+                    method:'post',
+                    success:function(data){
+                        $.lmParam.state = 1;
+                        module.exports.changeTr(tr,data);
+                    },
+                    error:function(data){
+                        $.lmParam.state = 2;
+                    }
+                });
+        });
     };
 
     exports.changeTr = function (tr , index) {

@@ -131,7 +131,7 @@ define('initColumn' , function (require , exports , module) {
         td2.append($('<p>@</p>'));
         td3.append($('<input type="text" class="lm-edit-value">'));
         td4.append('');
-        td5.append('<a href="javascript:void(0)" class="lm-save-btn">保存</a>');
+        td5.append('<a href="javascript:void(0)" class="lm-save-base-btn">保存</a>');
         tr.append(td0);
         tr.append(td1);
         tr.append(td2);
@@ -158,6 +158,7 @@ define('initColumn' , function (require , exports , module) {
         tr.append(td5);
         return tr;
     };
+
 });
 
 define('main',function (require , exports ) {
@@ -210,7 +211,8 @@ $(function (){
         addDnsRecordUrl:"http://localhost:8080/whmcs/vendor2/vendor/liumapp/dns/page/addDnsRecord.php",
         initDataUrl:"http://localhost:8080/whmcs/vendor2/vendor/liumapp/dns/page/initRecord.php",
         updateDnsRecordUrl:"http://localhost:8080/whmcs/vendor2/vendor/liumapp/dns/page/updateDnsRecord.php",
-        deleteDnsRecordUrl:"http://localhost:8080/whmcs/vendor2/vendor/liumapp/dns/page/deleteDnsRecord.php"
+        deleteDnsRecordUrl:"http://localhost:8080/whmcs/vendor2/vendor/liumapp/dns/page/deleteDnsRecord.php",
+        addDnsBaseUrl:"http://localhost:8080/whmcs/vendor2/vendor/liumapp/dns/page/addDnsBaseRecord.php"
     }
 
 });
@@ -234,6 +236,28 @@ define('saveColumn' , function (require , exports , module) {
                     success:function(data){
                         $.lmParam.state = 1;
                         module.exports.changeTr(tr,data);
+                    },
+                    error:function(data){
+                        $.lmParam.state = 2;
+                    }
+                });
+        });
+
+        $('body').on('click' , '.lm-save-base-btn' , function () {
+            var tr = $(this).parent().parent();
+            $.ajax(
+                {
+                    url:$.lmParam.addDnsRecordUrl,
+                    data:{
+                        domainId:$.lmParam.domainId,
+                        type:'A',
+                        subdomain:'@',
+                        value:$('.lm-edit-value').val()
+                    },
+                    method:'post',
+                    success:function(data){
+                        $.lmParam.state = 1;
+                        module.exports.changeTr(tr,data);s
                     },
                     error:function(data){
                         $.lmParam.state = 2;

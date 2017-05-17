@@ -33,7 +33,7 @@ define('initColumn' , function (require , exports , module) {
         td2.append($('<p>@</p>'));
         td3.append($('<input type="text" class="lm-edit-value">'));
         td4.append('');
-        td5.append('<a href="javascript:void(0)" class="lm-save-btn">保存</a>');
+        td5.append('<a href="javascript:void(0)" class="lm-save-base-btn">保存</a>');
         tr.append(td0);
         tr.append(td1);
         tr.append(td2);
@@ -60,4 +60,5 @@ define('initColumn' , function (require , exports , module) {
         tr.append(td5);
         return tr;
     };
+
 });
