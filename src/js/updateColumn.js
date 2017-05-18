@@ -37,7 +37,9 @@ define ('updateColumn' , function (require , exports , module){
         $('body').on('click' , '.lm-edit-base-btn' , function () {
             var title_tr = $('.lm-title-tr');
             var init = require('initColumn');
-            title_tr.before(init.baseRecord());
+            var delColumn = require('delColumn');
+            delColumn.del($(this).parent().parent());
+            title_tr.after(init.baseRecord());
         });
 
         $('body').on('click' , '.lm-confirmEdit-base-btn' , function () {

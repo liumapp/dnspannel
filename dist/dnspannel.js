@@ -74,6 +74,7 @@ define('cancelColumn' , function (require , exports , module){
 
 
 define('delColumn' , function (require , exports , module) {
+
     exports.init = function () {
         $('body').on('click' , '.lm-delete-btn' ,function () {
             if (confirm('您确定要删除吗？')) {
@@ -86,14 +87,18 @@ define('delColumn' , function (require , exports , module) {
                         domainId:$.lmParam.domainId
                     },
                     success: function (data) {
-
                         tr.remove();
-
                     }
                 });
             }
         });
-    }
+    };
+
+    exports.del = function (tr) {
+
+        tr.remove();
+
+    };
 });
 
 define('initColumn' , function (require , exports , module) {
@@ -105,7 +110,7 @@ define('initColumn' , function (require , exports , module) {
                 'url': $.lmParam.initDataUrl,
                 'method': 'post',
                 'data': {
-                    domainId: $.lmParam.domainId,
+                    domainId: $.lmParam.domainId
                 },
                 success : function (data) {
                     data = eval(data);
@@ -115,7 +120,7 @@ define('initColumn' , function (require , exports , module) {
                     } else {
                         $(data).each (function (){
                             if (this.type == 'A' && this.subdomain == '@') {
-                                titleTr.before(module.exports.baseColumn(this));
+                                titleTr.after(module.exports.baseColumn(this));
                             } else {
                                 titleTr.after(module.exports.dataColumn(this));
                             }
@@ -385,7 +390,9 @@ define ('updateColumn' , function (require , exports , module){
         $('body').on('click' , '.lm-edit-base-btn' , function () {
             var title_tr = $('.lm-title-tr');
             var init = require('initColumn');
-            title_tr.before(init.baseRecord());
+            var delColumn = require('delColumn');
+            delColumn.del($(this).parent().parent());
+            title_tr.after(init.baseRecord());
         });
 
         $('body').on('click' , '.lm-confirmEdit-base-btn' , function () {

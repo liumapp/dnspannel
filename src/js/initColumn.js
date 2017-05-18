@@ -7,7 +7,7 @@ define('initColumn' , function (require , exports , module) {
                 'url': $.lmParam.initDataUrl,
                 'method': 'post',
                 'data': {
-                    domainId: $.lmParam.domainId,
+                    domainId: $.lmParam.domainId
                 },
                 success : function (data) {
                     data = eval(data);
@@ -17,7 +17,7 @@ define('initColumn' , function (require , exports , module) {
                     } else {
                         $(data).each (function (){
                             if (this.type == 'A' && this.subdomain == '@') {
-                                titleTr.before(module.exports.baseColumn(this));
+                                titleTr.after(module.exports.baseColumn(this));
                             } else {
                                 titleTr.after(module.exports.dataColumn(this));
                             }

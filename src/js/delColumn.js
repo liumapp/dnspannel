@@ -1,4 +1,5 @@
 define('delColumn' , function (require , exports , module) {
+
     exports.init = function () {
         $('body').on('click' , '.lm-delete-btn' ,function () {
             if (confirm('您确定要删除吗？')) {
@@ -11,12 +12,16 @@ define('delColumn' , function (require , exports , module) {
                         domainId:$.lmParam.domainId
                     },
                     success: function (data) {
-
                         tr.remove();
-
                     }
                 });
             }
         });
-    }
+    };
+
+    exports.del = function (tr) {
+
+        tr.remove();
+
+    };
 });
