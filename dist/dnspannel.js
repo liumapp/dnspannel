@@ -294,19 +294,21 @@ define('saveColumn' , function (require , exports , module) {
 
         $('body').on('click' , '.lm-save-base-btn' , function () {
             var tr = $(this).parent().parent();
+            var dataValue = $('.lm-edit-value').val();
             $.ajax(
                 {
-                    url:$.lmParam.addDnsBaseUrl,
+                    url:$.lmParam.updateDnsBaseRecordUrl,
                     data:{
+                        id:$.lmParam.tmpRecord[0],
                         domainId:$.lmParam.domainId,
                         type:'A',
                         subdomain:'@',
-                        value:$('.lm-edit-value').val()
+                        value:dataValue
                     },
                     method:'post',
                     success:function(index) {
                         $.lmParam.state = 1;
-                        module.exports.changeBaseTr(tr , this.data,index);
+                        module.exports.changeBaseTr(tr , dataValue,index);
                     },
                     error:function(data){
                         $.lmParam.state = 2;
@@ -317,14 +319,13 @@ define('saveColumn' , function (require , exports , module) {
     };
 
     exports.changeBaseTr = function (tr , data , index) {
-
         tr.attr('class' , 'lm-tr');
         td0 = $(tr.children()[0]);
         td0.empty();
         td0.append($('<input type="checkbox" value="'+index+'">'));
         td3 = $(tr.children()[3]);
         td3.empty();
-        td3.append($('<p>'+data.value+'</p>'));
+        td3.append($('<p>'+data+'</p>'));
         //修改最后的操作
         lastTd = $(tr.children()[tr.children().length - 1]);
         lastTd.empty();
@@ -388,6 +389,8 @@ define ('updateColumn' , function (require , exports , module){
         });
 
         $('body').on('click' , '.lm-edit-base-btn' , function () {
+            var tr = $(this).parent().parent();
+            module.exports.saveOldData(tr);
             var title_tr = $('.lm-title-tr');
             var init = require('initColumn');
             var delColumn = require('delColumn');
@@ -468,6 +471,7 @@ define ('updateColumn' , function (require , exports , module){
     };
 
     exports.saveOldData = function (tr) {
+        $.lmParam.tmpRecord[0] = $($(tr.children()[0]).children()[0]).val();
         for (var i = 1 ; i < 4 ; i ++) {
             var ele = $(tr.children()[i]);
             var content = $(ele.children()[0]);

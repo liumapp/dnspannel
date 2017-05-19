@@ -35,6 +35,8 @@ define ('updateColumn' , function (require , exports , module){
         });
 
         $('body').on('click' , '.lm-edit-base-btn' , function () {
+            var tr = $(this).parent().parent();
+            module.exports.saveOldData(tr);
             var title_tr = $('.lm-title-tr');
             var init = require('initColumn');
             var delColumn = require('delColumn');
@@ -115,6 +117,7 @@ define ('updateColumn' , function (require , exports , module){
     };
 
     exports.saveOldData = function (tr) {
+        $.lmParam.tmpRecord[0] = $($(tr.children()[0]).children()[0]).val();
         for (var i = 1 ; i < 4 ; i ++) {
             var ele = $(tr.children()[i]);
             var content = $(ele.children()[0]);
