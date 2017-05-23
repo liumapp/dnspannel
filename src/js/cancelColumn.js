@@ -2,12 +2,14 @@ define('cancelColumn' , function (require , exports , module){
     exports.init = function () {
         $('body').on('click' , '.lm-cancel-btn' ,function (){
             $.lmParam.state = 1;
+            $('.lm-help-msg').remove();
             $(this).parent().parent().remove();
         });
 
         $('body').on('click' , '.lm-back-btn' , function () {
             $.lmParam.state = 1;
             tr = $(this).parent().parent();
+            $('.lm-help-msg').remove();
             module.exports.changeTr(tr);
         });
     };
