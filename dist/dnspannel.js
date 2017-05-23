@@ -1,3 +1,25 @@
+define ('info' , function (require , exports , module) {
+
+    var table = $('.lm-dns-table');
+
+    exports.init = function () {
+
+        var tr = $('<tr></tr>');
+
+        var td = $('<td colspan="6"></td>');
+
+        var msg = $('<p>提示：A记录的@主机记录表示您的根域名解析</p>');
+
+        td.append(msg);
+
+        tr.append(td);
+
+        table.append(tr);
+
+    }
+
+
+});
 define('addColumn',function (require , exports , module) {
 
     var addBtn = $(".lm-add-dns-record");
@@ -101,6 +123,13 @@ define('delColumn' , function (require , exports , module) {
     };
 });
 
+define ( 'help' , function (require , exports , module) {
+
+    
+
+
+
+});
 define('initColumn' , function (require , exports , module) {
 
     exports.init = function () {
@@ -124,7 +153,6 @@ define('initColumn' , function (require , exports , module) {
                             } else {
                                 titleTr.after(module.exports.dataColumn(this));
                             }
-
                         });
                     }
                 }
@@ -223,6 +251,8 @@ define('main',function (require , exports ) {
 
     var updateColumn = require('updateColumn');
 
+    var info = require ('info');
+
     exports.init = function () {
 
         initColumn.init();
@@ -236,6 +266,8 @@ define('main',function (require , exports ) {
         saveColumn.init();
 
         updateColumn.init();
+
+        info.init();
 
     }
 

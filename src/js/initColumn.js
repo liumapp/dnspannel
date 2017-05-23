@@ -21,7 +21,6 @@ define('initColumn' , function (require , exports , module) {
                             } else {
                                 titleTr.after(module.exports.dataColumn(this));
                             }
-
                         });
                     }
                 }

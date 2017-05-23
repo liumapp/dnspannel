@@ -12,6 +12,8 @@ define('main',function (require , exports ) {
 
     var updateColumn = require('updateColumn');
 
+    var info = require ('info');
+
     exports.init = function () {
 
         initColumn.init();
@@ -25,6 +27,8 @@ define('main',function (require , exports ) {
         saveColumn.init();
 
         updateColumn.init();
+
+        info.init();
 
     }
 
