@@ -127,15 +127,22 @@ define('delColumn' , function (require , exports , module) {
 
 define ( 'help' , function (require , exports , module) {
 
-    var container = $('<div class="lm-help-msg"></div>');
+    var container = $('<tr class="lm-tr"><td colspan="5"><div class="lm-help-msg"></div></td></tr>');
 
     var baseData = 'this is baseData';
 
-    var selectData = 'this is select data';
+    var selectData = '<p>搭建网站： 要将域名指向主机服务商提供的IP地址，请选择「A记录」；要将域名指向主机服务商提供的另一个域名，请选择「CNAME记录」。</p>' +
+        '<p>A记录：将域名指向一个IPv4地址（例如：10.10.10.10），需要增加A记录</p>' +
+        '<p>CNAME记录：如果将域名指向一个域名，实现与被指向域名相同的访问效果，需要增加CNAME记录</p>';
 
-    var typeData = 'this is type data';
+    var typeData = '<p>温馨提示：要将域名example.com解析为www.example.com，在主机记录(RR)处填写www即可。主机记录就是域名前缀，常见用法有：</p>' +
+    '<p>www ：将域名解析为www.example.com，填写www；</p>' +
+    '<p>@ ：将域名解析为example.com（不带www），填写@或者不填写；</p>' +
+    '<p>二级域名 ：如：mail.example.com或abc.example.com，填写mail或abc；</p>' +
+    '<p>手机网站 ：如：m.example.com，填写m。</p>';
 
-    var valueData = 'this is value data';
+    var valueData = '<p>温馨提示：A记录值请填写您的服务器IP地址（必须为IPv4地址，例如：202.106.0.20），若不清楚IP，请您咨询您的空间服务商。如果IP地址的格式中带有端口，如：202.106.0.20:8080，则只添加202.106.0.20即可。</p>' +
+    '<p>CNAME记录值请填写空间服务商提供给您的域名（例如：hichina.com）。</p>';
 
     exports.init = function () {
 
@@ -158,9 +165,9 @@ define ( 'help' , function (require , exports , module) {
 
         var ele = $('.lm-edit-tr');
 
-        container.append(baseData);
+        ele.after(container);
 
-        ele.append(container);
+        $(".lm-help-msg").append(baseData);
 
         $('body').on('mouseenter' , 'select[class=lm-edit-type]' ,function () {
 
@@ -179,8 +186,6 @@ define ( 'help' , function (require , exports , module) {
             module.exports.valueFocus($(this));
 
         });
-
-
 
     };
 
