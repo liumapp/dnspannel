@@ -17,6 +17,7 @@ define('saveColumn' , function (require , exports , module) {
                     method:'post',
                     success:function(data){
                         $.lmParam.state = 1;
+                        $('.msg-container').remove();
                         module.exports.changeTr(tr,data);
                     },
                     error:function(data){
@@ -41,6 +42,7 @@ define('saveColumn' , function (require , exports , module) {
                     method:'post',
                     success:function(index) {
                         $.lmParam.state = 1;
+                        $('.msg-container').remove();
                         module.exports.changeBaseTr(tr , dataValue,index);
                     },
                     error:function(data){

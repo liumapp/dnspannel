@@ -8,7 +8,7 @@ define ('info' , function (require , exports , module) {
 
         var td = $('<td colspan="6"></td>');
 
-        var msg = $('<p>提示：A记录的@主机记录表示您的根域名解析</p>');
+        var msg = $('<p>提示：域名解析的生效时间一般在五分钟左右</p>');
 
         td.append(msg);
 

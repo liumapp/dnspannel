@@ -34,7 +34,7 @@ define ( 'help' , function (require , exports , module) {
      */
     exports.helpStart = function () {
 
-        var container = $('<tr class="lm-tr"><td colspan="5"><div class="lm-help-msg"></div></td></tr>');
+        var container = $('<tr class="lm-tr msg-container"><td colspan="5"><div class="lm-help-msg"></div></td></tr>');
 
         var ele = $('.lm-edit-tr');
 

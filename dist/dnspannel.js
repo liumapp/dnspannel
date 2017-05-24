@@ -8,7 +8,7 @@ define ('info' , function (require , exports , module) {
 
         var td = $('<td colspan="6"></td>');
 
-        var msg = $('<p>提示：A记录的@主机记录表示您的根域名解析</p>');
+        var msg = $('<p>提示：域名解析的生效时间一般在五分钟左右</p>');
 
         td.append(msg);
 
@@ -67,14 +67,14 @@ define('cancelColumn' , function (require , exports , module){
     exports.init = function () {
         $('body').on('click' , '.lm-cancel-btn' ,function (){
             $.lmParam.state = 1;
-            $('.lm-help-msg').remove();
+            $('.msg-container').remove();
             $(this).parent().parent().remove();
         });
 
         $('body').on('click' , '.lm-back-btn' , function () {
             $.lmParam.state = 1;
             tr = $(this).parent().parent();
-            $('.lm-help-msg').remove();
+            $('.msg-container').remove();
             module.exports.changeTr(tr);
         });
     };
@@ -161,7 +161,7 @@ define ( 'help' , function (require , exports , module) {
      */
     exports.helpStart = function () {
 
-        var container = $('<tr class="lm-tr"><td colspan="5"><div class="lm-help-msg"></div></td></tr>');
+        var container = $('<tr class="lm-tr msg-container"><td colspan="5"><div class="lm-help-msg"></div></td></tr>');
 
         var ele = $('.lm-edit-tr');
 
@@ -408,6 +408,7 @@ define('saveColumn' , function (require , exports , module) {
                     method:'post',
                     success:function(data){
                         $.lmParam.state = 1;
+                        $('.msg-container').remove();
                         module.exports.changeTr(tr,data);
                     },
                     error:function(data){
@@ -432,6 +433,7 @@ define('saveColumn' , function (require , exports , module) {
                     method:'post',
                     success:function(index) {
                         $.lmParam.state = 1;
+                        $('.msg-container').remove();
                         module.exports.changeBaseTr(tr , dataValue,index);
                     },
                     error:function(data){
@@ -503,6 +505,7 @@ define ('updateColumn' , function (require , exports , module){
                     },
                     method:'post',
                     success:function(data){
+                        $('.msg-container').remove();
                         $.lmParam.state = 1;
                         module.exports.changeTr(tr);
                     },
@@ -536,6 +539,7 @@ define ('updateColumn' , function (require , exports , module){
                     },
                     method:'post',
                     success:function(data){
+                        $('.msg-container').remove();
                         $.lmParam.state = 1;
                         var saveColumn = require('saveColumn');
                         saveColumn.changeBaseTr(tr , this.data , data);
@@ -603,4 +607,5 @@ define ('updateColumn' , function (require , exports , module){
             $.lmParam.tmpRecord[i] = html;
         }
     }
+
 });

@@ -25,6 +25,7 @@ define ('updateColumn' , function (require , exports , module){
                     },
                     method:'post',
                     success:function(data){
+                        $('.msg-container').remove();
                         $.lmParam.state = 1;
                         module.exports.changeTr(tr);
                     },
@@ -58,6 +59,7 @@ define ('updateColumn' , function (require , exports , module){
                     },
                     method:'post',
                     success:function(data){
+                        $('.msg-container').remove();
                         $.lmParam.state = 1;
                         var saveColumn = require('saveColumn');
                         saveColumn.changeBaseTr(tr , this.data , data);
@@ -125,4 +127,5 @@ define ('updateColumn' , function (require , exports , module){
             $.lmParam.tmpRecord[i] = html;
         }
     }
+
 });
