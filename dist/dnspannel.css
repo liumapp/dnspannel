@@ -86,3 +86,11 @@ th {
 .lm-save-base-btn {
   color: #449d44;
 }
+.lm-help-msg p {
+  text-align: left !important;
+  line-height: 20px;
+  height: 20px !important;
+  font-size: 0.8em;
+  display: inline-block;
+  width: 100%;
+}
