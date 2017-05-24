@@ -127,10 +127,6 @@ define('delColumn' , function (require , exports , module) {
 
 define ( 'help' , function (require , exports , module) {
 
-    var container = $('<tr class="lm-tr"><td colspan="5"><div class="lm-help-msg"></div></td></tr>');
-
-    var baseData = 'this is baseData';
-
     var selectData = '<p>搭建网站： 要将域名指向主机服务商提供的IP地址，请选择「A记录」；要将域名指向主机服务商提供的另一个域名，请选择「CNAME记录」。</p>' +
         '<p>A记录：将域名指向一个IPv4地址（例如：10.10.10.10），需要增加A记录</p>' +
         '<p>CNAME记录：如果将域名指向一个域名，实现与被指向域名相同的访问效果，需要增加CNAME记录</p>';
@@ -160,14 +156,18 @@ define ( 'help' , function (require , exports , module) {
 
     };
 
-    // send me the tr by $
+    /**
+     *  创建msgContainer
+     */
     exports.helpStart = function () {
+
+        var container = $('<tr class="lm-tr"><td colspan="5"><div class="lm-help-msg"></div></td></tr>');
 
         var ele = $('.lm-edit-tr');
 
         ele.after(container);
 
-        $(".lm-help-msg").append(baseData);
+        $(".lm-help-msg").append(selectData);
 
         $('body').on('mouseenter' , 'select[class=lm-edit-type]' ,function () {
 
@@ -188,6 +188,8 @@ define ( 'help' , function (require , exports , module) {
         });
 
     };
+
+
 
     exports.selectFocus = function (ele) {
 
